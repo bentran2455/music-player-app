@@ -11,6 +11,11 @@ const TrackList = () => {
 
   return (
     <>
+      <h2>
+        {currentTrackName
+          ? `Now Playing: ${currentTrackName}`
+          : "No Track Playing"}
+      </h2>
       {trackList.map((track, index) => (
         <div
           key={index}
