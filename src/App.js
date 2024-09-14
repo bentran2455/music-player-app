@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { MusicPlayerProvider } from "./contexts/MusicPlayerContext";
+import TrackList from "./components/TrackList";
+import useMusicPlayer from "./hooks/useMusicPlayer";
 
-function App() {
+const PlayerControls = () => {
+  const { togglePlay, playPreviousTrack, playNextTrack, isPlaying } =
+    useMusicPlayer();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="player-controls">
+      <button onClick={playPreviousTrack}>Previous</button>
+      <button onClick={togglePlay}>{isPlaying ? "Pause" : "Play"}</button>
+      <button onClick={playNextTrack}>Next</button>
     </div>
   );
-}
+};
+
+const App = () => {
+  return (
+    <MusicPlayerProvider>
+      <div className="app-container">
+        <h1>My Music Player</h1>
+        <TrackList />
+        <PlayerControls />
+      </div>
+    </MusicPlayerProvider>
+  );
+};
 
 export default App;
